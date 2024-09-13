@@ -14,7 +14,8 @@ contract ThunderLoanTest is BaseTest {
     MockFlashLoanReceiver mockFlashLoanReceiver;
 
     function setUp() public override {
-        super.setUp();
+        super.setUp();                              // 调用了父合约 BaseTest 的 setUp()
+
         vm.prank(user);
         mockFlashLoanReceiver = new MockFlashLoanReceiver(address(thunderLoan));
     }
@@ -24,13 +25,13 @@ contract ThunderLoanTest is BaseTest {
     }
 
     function testSetAllowedTokens() public {
-        vm.prank(thunderLoan.owner());
+        vm.prank(thunderLoan.owner());                  // only the owner of thunder can set allowed token
         thunderLoan.setAllowedToken(tokenA, true);
         assertEq(thunderLoan.isAllowedToken(tokenA), true);
     }
 
     function testOnlyOwnerCanSetTokens() public {
-        vm.prank(liquidityProvider);
+        vm.prank(liquidityProvider);                    // only the owner of thunder can set allowed token
         vm.expectRevert();
         thunderLoan.setAllowedToken(tokenA, true);
     }
@@ -44,7 +45,11 @@ contract ThunderLoanTest is BaseTest {
     function testCantDepositUnapprovedTokens() public {
         tokenA.mint(liquidityProvider, AMOUNT);
         tokenA.approve(address(thunderLoan), AMOUNT);
-        vm.expectRevert(abi.encodeWithSelector(ThunderLoan.ThunderLoan__NotAllowedToken.selector, address(tokenA)));
+
+        vm.expectRevert(
+            abi.encodeWithSelector(ThunderLoan.ThunderLoan__NotAllowedToken.selector, address(tokenA))
+        );
+        
         thunderLoan.deposit(tokenA, AMOUNT);
     }
 
@@ -79,11 +84,21 @@ contract ThunderLoanTest is BaseTest {
     function testFlashLoan() public setAllowedToken hasDeposits {
         uint256 amountToBorrow = AMOUNT * 10;
         uint256 calculatedFee = thunderLoan.getCalculatedFee(tokenA, amountToBorrow);
-        vm.startPrank(user);
-        tokenA.mint(address(mockFlashLoanReceiver), AMOUNT);
-        thunderLoan.flashloan(address(mockFlashLoanReceiver), tokenA, amountToBorrow, "");
-        vm.stopPrank();
 
+
+        vm.startPrank(user);
+
+        // Mint "AMOUNT" of tokenA to the MockFlashLoanReceiver to ensure it has sufficient balance to cover the fee
+        tokenA.mint(address(mockFlashLoanReceiver), AMOUNT); 
+        
+        assertEq(tokenA.balanceOf(address(mockFlashLoanReceiver)), AMOUNT);
+
+        // flash loan
+        thunderLoan.flashloan(address(mockFlashLoanReceiver), tokenA, amountToBorrow, "");
+
+        vm.stopPrank();
+        
+        assertEq(calculatedFee, (amountToBorrow * 3 * 1e15) / 1e18);                    // fee ratio: 0.3%
         assertEq(mockFlashLoanReceiver.getBalanceDuring(), amountToBorrow + AMOUNT);
         assertEq(mockFlashLoanReceiver.getBalanceAfter(), AMOUNT - calculatedFee);
     }

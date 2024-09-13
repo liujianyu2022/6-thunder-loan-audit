@@ -11,8 +11,8 @@ contract MockFlashLoanReceiver {
 
     using SafeERC20 for IERC20;
 
-    address s_owner;
-    address s_thunderLoan;
+    address s_owner;                            // 合约的所有者地址 msg.sender
+    address s_thunderLoan;                      // 保存 ThunderLoan 合约的地址
 
     uint256 s_balanceDuringFlashLoan;
     uint256 s_balanceAfterFlashLoan;
@@ -24,25 +24,37 @@ contract MockFlashLoanReceiver {
     }
 
     function executeOperation(
-        address token,
+        address token,                      // 闪电贷的代币
         uint256 amount,
-        uint256 fee,
-        address initiator,
+        uint256 fee,                        // 闪电贷的费用
+        address initiator,                  // 发起闪电贷的调用者（即合约所有者）
         bytes calldata /*  params */
     )
         external
         returns (bool)
     {
         s_balanceDuringFlashLoan = IERC20(token).balanceOf(address(this));
+
+        // 检查 initiator 是否为合约的所有者（s_owner）
         if (initiator != s_owner) {
             revert MockFlashLoanReceiver__onlyOwner();
         }
+
+        // 检查 msg.sender 是否为 ThunderLoan 合约地址（s_thunderLoan）
+        // this method is called by thunderLoan
         if (msg.sender != s_thunderLoan) {
             revert MockFlashLoanReceiver__onlyThunderLoan();
         }
+
+        // now, you have the borrowed funds, you can peform any operations you wish here !!
+
+        // 批准并归还闪电贷
         IERC20(token).approve(s_thunderLoan, amount + fee);
         IThunderLoan(s_thunderLoan).repay(token, amount + fee);
+
+
         s_balanceAfterFlashLoan = IERC20(token).balanceOf(address(this));
+
         return true;
     }
 
