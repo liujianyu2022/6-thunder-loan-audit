@@ -74,6 +74,7 @@ contract Proxy {
     }
 
     // 使用fallback函数转发所有调用
+    // 当调用 proxy 合约中不存在的函数时，fallback函数会被调用，从而触发delegatecall
     fallback() external payable {
 
         // 获取参数并调用存储合约的setA和setB
