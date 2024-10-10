@@ -10,6 +10,13 @@ import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/I
 // logic    -->  implementation contract
 // Initializable contract to do something about storage !!
 
+// 在Solidity中，可升级合约的核心原理是使用代理合约模式（Proxy Pattern），即通过将合约的逻辑与存储分离来实现。
+// 这样即使逻辑合约发生变化，存储数据仍然保持不变，从而避免部署新的合约时数据丢失的问题。
+// 1. 代理合约：代理合约负责与用户交互，同时转发调用到逻辑合约。它本身并不包含业务逻辑，只包含一个指向逻辑合约地址的存储变量。代理合约使用delegatecall将用户的调用转发给逻辑合约。
+// 2. 逻辑合约：逻辑合约包含所有的业务逻辑函数。每次合约升级时，只需部署新的逻辑合约，而无需更改代理合约。代理合约通过存储的地址指向新的逻辑合约。
+// 3. 存储数据分离：在使用delegatecall时，逻辑合约的函数在代理合约的上下文中执行，即使用代理合约的存储。这就确保了即使逻辑合约升级，原始的存储状态仍然保持不变。
+
+
 contract OracleUpgradeable is Initializable {
     address private s_poolFactory;
 
