@@ -12,16 +12,14 @@ contract AssetToken is ERC20 {
 
     using SafeERC20 for IERC20;
 
-    /*//////////////////////////////////////////////////////////////
-                            STATE VARIABLES
-    //////////////////////////////////////////////////////////////*/
-    IERC20 private immutable i_underlying;            
-    address private immutable i_thunderLoan;
+    IERC20 private immutable i_underlying;        // it represents the actual ERC20, like USDT、USDC、ETH and so on
+    address private immutable i_thunderLoan;      
 
     // The underlying per asset exchange rate
     // ie: s_exchangeRate = 2
     // means 1 asset token is worth 2 underlying tokens
-    // 记录 基础资产underlying 和 AssetToken 之间的兑换率。这个兑换率表示 1 个 AssetToken 对应多少基础资产。初始兑换率为 1e18，即 1:1。
+    // 记录 基础资产underlying 和 AssetToken 之间的兑换率。
+    // 这个兑换率表示 1 个 AssetToken 对应多少基础资产。初始兑换率为 1e18，即 1:1。
     uint256 private s_exchangeRate;
     uint256 public constant EXCHANGE_RATE_PRECISION = 1e18;
     uint256 private constant STARTING_EXCHANGE_RATE = 1e18;
@@ -57,7 +55,7 @@ contract AssetToken is ERC20 {
         string memory assetName,
         string memory assetSymbol
     )
-        ERC20(assetName, assetSymbol)
+        ERC20(assetName, assetSymbol)                   // 初始化 AssetToken
         revertIfZeroAddress(thunderLoan)
         revertIfZeroAddress(address(underlying))
     {

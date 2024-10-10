@@ -6,8 +6,8 @@ import { IPoolFactory } from "../interfaces/IPoolFactory.sol";
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 // notion: upgradeable contract can not have the constructor !!
-// storage  -->  proxy contract
-// logic    -->  implementation contract
+// proxy contract             -->  storage
+// implementation contract    -->  logic
 // Initializable contract to do something about storage !!
 
 // 在Solidity中，可升级合约的核心原理是使用代理合约模式（Proxy Pattern），即通过将合约的逻辑与存储分离来实现。

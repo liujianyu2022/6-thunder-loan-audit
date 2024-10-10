@@ -1,65 +1,3 @@
-//      .edee...      .....       .eeec.   ..eee..
-//    .d*"  """"*e..d*"""""**e..e*""  "*c.d""  ""*e.
-//   z"           "$          $""       *F         **e.
-//  z"             "c        d"          *.           "$.
-// .F                        "            "            'F
-// d                                                   J%
-// 3         .                                        e"
-// 4r       e"              .                        d"
-//  $     .d"     .        .F             z ..zeeeeed"
-//  "*beeeP"      P        d      e.      $**""    "
-//      "*b.     Jbc.     z*%e.. .$**eeeeP"
-//         "*beee* "$$eeed"  ^$$$""    "
-//                  '$$.     .$$$c
-//                   "$$.   e$$*$$c
-//                    "$$..$$P" '$$r
-//                     "$$$$"    "$$.           .d
-//         z.          .$$$"      "$$.        .dP"
-//         ^*e        e$$"         "$$.     .e$"
-//           *b.    .$$P"           "$$.   z$"
-//            "$c  e$$"              "$$.z$*"
-//             ^*e$$P"                "$$$"
-//               *$$                   "$$r
-//               '$$F                 .$$P
-//                $$$                z$$"
-//                4$$               d$$b.
-//                .$$%            .$$*"*$$e.
-//             e$$$*"            z$$"    "*$$e.
-//            4$$"              d$P"        "*$$e.
-//            $P              .d$$$c           "*$$e..
-//           d$"             z$$" *$b.            "*$L
-//          4$"             e$P"   "*$c            ^$$
-//          $"            .d$"       "$$.           ^$r
-//         dP            z$$"         ^*$e.          "b
-//        4$            e$P             "$$           "
-//                     J$F               $$
-//                     $$               .$F
-//                    4$"               $P"
-//                    $"               dP    Gilo94'
-// https://www.asciiart.eu/nature/lightning
-//  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄         ▄  ▄▄        ▄  ▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
-// ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░░▌      ▐░▌▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
-//  ▀▀▀▀█░█▀▀▀▀ ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌░▌     ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌
-//      ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌▐░▌    ▐░▌▐░▌       ▐░▌▐░▌          ▐░▌       ▐░▌
-//      ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░▌ ▐░▌   ▐░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌
-//      ▐░▌     ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌  ▐░▌  ▐░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
-//      ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░▌   ▐░▌ ▐░▌▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀█░█▀▀
-//      ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌    ▐░▌▐░▌▐░▌       ▐░▌▐░▌          ▐░▌     ▐░▌
-//      ▐░▌     ▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌     ▐░▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░▌      ▐░▌
-//      ▐░▌     ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌      ▐░░▌▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░▌       ▐░▌
-//       ▀       ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀        ▀▀  ▀▀▀▀▀▀▀▀▀▀   ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀
-//
-//  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄
-// ▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌      ▐░▌
-// ▐░▌          ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌░▌     ▐░▌
-// ▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌▐░▌    ▐░▌
-// ▐░▌          ▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌ ▐░▌   ▐░▌
-// ▐░▌          ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌  ▐░▌  ▐░▌
-// ▐░▌          ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌   ▐░▌ ▐░▌
-// ▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌    ▐░▌▐░▌
-// ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░▌     ▐░▐░▌
-// ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌      ▐░░▌
-//  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀        ▀▀
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity 0.8.20;
 
@@ -88,20 +26,16 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
     using SafeERC20 for IERC20;
     using Address for address;
 
-    /*//////////////////////////////////////////////////////////////
-                            STATE VARIABLES
-    //////////////////////////////////////////////////////////////*/
+    // underlyingToken => AssetToken
     mapping(IERC20 => AssetToken) public s_tokenToAssetToken;
 
     // The fee in WEI, it should have 18 decimals. Each flash loan takes a flat fee of the token price.
-    uint256 private s_feePrecision;
+    // it should be immutable or constant because it never changed after deployment.
+    uint256 private s_feePrecision; 
     uint256 private s_flashLoanFee; // 0.3% ETH fee
 
     mapping(IERC20 token => bool currentlyFlashLoaning) private s_currentlyFlashLoaning;
 
-    /*//////////////////////////////////////////////////////////////
-                                 EVENTS
-    //////////////////////////////////////////////////////////////*/
     event Deposit(address indexed account, IERC20 indexed token, uint256 amount);
     event AllowedTokenSet(IERC20 indexed token, AssetToken indexed asset, bool allowed);
     event Redeemed(
@@ -134,13 +68,13 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
         _disableInitializers();
     }
 
-    /*//////////////////////////////////////////////////////////////
-                           EXTERNAL FUNCTIONS
-    //////////////////////////////////////////////////////////////*/
-    function initialize(address tswapAddress) external initializer {
-        __Ownable_init(msg.sender);
+    // what happens if we deploy the contract, and someone else initializes it?
+    // that would suck, and they can pick a different poolFactoryAddress.
+    // the OnlyInitialized modifier can be used to prevent the front run.
+    function initialize(address poolFactoryAddress) external initializer {
+        __Ownable_init(msg.sender);         // function __Ownable_init(address initialOwner) internal onlyInitializing             
         __UUPSUpgradeable_init();
-        __Oracle_init(tswapAddress);
+        __Oracle_init(poolFactoryAddress);                // 继承于 OracleUpgradedable.sol
         s_feePrecision = 1e18;
         s_flashLoanFee = 3e15; // 0.3% ETH fee
     }
@@ -148,7 +82,7 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
     // 用户可以将指定的ERC-20代币存入合约，并获得对应的资产代币（AssetToken），用于表示用户的存款权益
     // the user is the liquidity provider !!!
     function deposit(IERC20 token, uint256 amount) external revertIfZero(amount) revertIfNotAllowedToken(token) {
-        AssetToken assetToken = s_tokenToAssetToken[token];
+        AssetToken assetToken = s_tokenToAssetToken[token];             // AssetToken represents the share of the pool
 
         uint256 exchangeRate = assetToken.getExchangeRate();
         uint256 mintAmount = (amount * assetToken.EXCHANGE_RATE_PRECISION()) / exchangeRate;
@@ -160,6 +94,7 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
 
         // (from, to, amount)
         // the user transfer amount tokens to assetToken contract
+        // the money is stored in the AssetToken Contract
         token.safeTransferFrom(msg.sender, address(assetToken), amount);
     }
 
@@ -303,7 +238,9 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
 
             emit AllowedTokenSet(token, assetToken, allowed);
             return assetToken;                                          // 返回创建的 AssetToken 合约实例
+
         } else {
+
             AssetToken assetToken = s_tokenToAssetToken[token];
             delete s_tokenToAssetToken[token];
             emit AllowedTokenSet(token, assetToken, allowed);
