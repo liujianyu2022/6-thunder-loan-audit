@@ -81,19 +81,19 @@ contract ThunderLoanTest is BaseTest {
         assertEq(assetToken.balanceOf(liquidityProvider), AMOUNT);
     }
 
-    // liquidityProvider 存入 100 tokenA 到 thunderLoan
+    // liquidityProvider 存入 1000 tokenA 到 thunderLoan
     modifier hasDeposits() {
         vm.startPrank(liquidityProvider);
-        tokenA.mint(liquidityProvider, DEPOSIT_AMOUNT);         // 100e18
+        tokenA.mint(liquidityProvider, DEPOSIT_AMOUNT);         // 1000e18
         tokenA.approve(address(thunderLoan), DEPOSIT_AMOUNT);
         thunderLoan.deposit(tokenA, DEPOSIT_AMOUNT);
         vm.stopPrank();
         _;
     }
 
-    // thunderLoan 合约中有了 100 tokenA 
+    // thunderLoan 合约中有了 1000 tokenA 
     function testFlashLoan() public setAllowedToken hasDeposits {
-        uint256 amountToBorrow = AMOUNT * 10;                                               // 借出 10 tokenA
+        uint256 amountToBorrow = AMOUNT * 10;                                               // 借出 100 tokenA
         uint256 calculatedFee = thunderLoan.getCalculatedFee(tokenA, amountToBorrow);       // 
 
         vm.startPrank(user);
@@ -112,25 +112,26 @@ contract ThunderLoanTest is BaseTest {
         assertEq(mockFlashLoanReceiver.getBalanceAfter(), AMOUNT - calculatedFee);
     }
 
-    // liquidityProvider 存入了 100 tokenA，因此 thunderLoan 合约中有了 100 tokenA，liquidityProvider 拥有了 100 assetToken 
+    // liquidityProvider 存入了 1000 tokenA，因此 thunderLoan 合约中有了 1000 tokenA，liquidityProvider 拥有了 1000 assetToken 
     function testRedeem() public setAllowedToken hasDeposits {
-        uint256 amountToBorrow = AMOUNT * 10;                                               // 借出 10 tokenA
-        uint256 calculatedFee = thunderLoan.getCalculatedFee(tokenA, amountToBorrow);       // fee = 10 * 0.3% = 0.03
+        uint256 amountToBorrow = AMOUNT * 10;                                               // 借出 100 tokenA
+        uint256 calculatedFee = thunderLoan.getCalculatedFee(tokenA, amountToBorrow);       // fee = 100 * 0.3% = 0.3
 
         vm.startPrank(user);
-        tokenA.mint(address(mockFlashLoanReceiver), AMOUNT);                                // 给 user 1 tokenA，以便于偿还 fee
+        tokenA.mint(address(mockFlashLoanReceiver), AMOUNT);                                // 给 user 10 tokenA，以便于偿还 fee
         thunderLoan.flashloan(address(mockFlashLoanReceiver), tokenA, amountToBorrow, "");
         vm.stopPrank();
 
         AssetToken assetToken = thunderLoan.getAssetFromToken(tokenA);
 
-        assertEq(tokenA.balanceOf(address(assetToken)), DEPOSIT_AMOUNT + calculatedFee);    // ( 100 + 0.03 ) tokenA
+        assertEq(calculatedFee, 100 * 3e15);                                                      
+        assertEq(tokenA.balanceOf(address(assetToken)), DEPOSIT_AMOUNT + calculatedFee);    // ( 1000 + 0.3 ) tokenA
 
         vm.startPrank(liquidityProvider);
         thunderLoan.redeem(tokenA, type(uint256).max);                                      // liquidityProvider 取出全部 tokenA
         vm.stopPrank();
 
         assertEq(tokenA.balanceOf(address(assetToken)), 0);                                         // assetToken 合约上剩余 0 tokenA
-        assertEq(tokenA.balanceOf(address(liquidityProvider)), DEPOSIT_AMOUNT + calculatedFee);     // liquidityProvider 此时有 (100 + 0.03) tokenA
+        assertEq(tokenA.balanceOf(address(liquidityProvider)), DEPOSIT_AMOUNT + calculatedFee);     // liquidityProvider 此时有 (1000 + 0.3) tokenA
     }
 }
