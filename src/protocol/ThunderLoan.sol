@@ -85,12 +85,15 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
         AssetToken assetToken = s_tokenToAssetToken[token];             // AssetToken represents the share of the pool
 
         uint256 exchangeRate = assetToken.getExchangeRate();
+
+        // EXCHANGE_RATE_PRECISION / exchangeRate <= 1
         uint256 mintAmount = (amount * assetToken.EXCHANGE_RATE_PRECISION()) / exchangeRate;
         emit Deposit(msg.sender, token, amount);
         assetToken.mint(msg.sender, mintAmount);
 
-        uint256 calculatedFee = getCalculatedFee(token, amount);
-        assetToken.updateExchangeRate(calculatedFee);
+        // 存款的时候不需要更新 exchangeRate，只有在其他用户进行闪电贷的时候获取fee后才更新
+        // uint256 calculatedFee = getCalculatedFee(token, amount);
+        // assetToken.updateExchangeRate(calculatedFee);
 
         // (from, to, amount)
         // the user transfer amount tokens to assetToken contract
@@ -110,6 +113,7 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
             amountOfAssetToken = assetToken.balanceOf(msg.sender);
         }
 
+        // exchangeRate / EXCHANGE_RATE_PRECISION >= 1
         uint256 amountUnderlying = (amountOfAssetToken * exchangeRate) / assetToken.EXCHANGE_RATE_PRECISION();
 
         emit Redeemed(msg.sender, token, amountOfAssetToken, amountUnderlying);
@@ -158,7 +162,7 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
         //     ) external;
         // }
 
-        // eceiverAddress.functionCall(bytes memory data)       data 是通过 ABI 编码的函数签名和参数
+        // receiverAddress.functionCall(bytes memory data)       data 是通过 ABI 编码的函数签名和参数
         // 是一个低级调用方式，用于调用 receiverAddress 代表的外部合约地址上的某个函数。它提供了比直接使用 call 更加安全的方式来执行外部合约的函数。
         // functionCall 是 Solidity 中 Address 库的一部分，能够通过地址进行安全的合约调用，并带有失败处理机制。
 
@@ -255,9 +259,8 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
         //slither-disable-next-line divide-before-multiply
         uint256 valueOfBorrowedToken = (amount * getPriceInWeth(address(token))) / s_feePrecision;
 
-        
         //slither-disable-next-line divide-before-multiply
-        fee = (valueOfBorrowedToken * s_flashLoanFee) / s_feePrecision;
+        fee = (valueOfBorrowedToken * s_flashLoanFee) / s_feePrecision;     // fee = valueOfBorrowedToken * 0.3%
     }
 
     function updateFlashLoanFee(uint256 newFee) external onlyOwner {
