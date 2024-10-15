@@ -21,6 +21,7 @@ contract ThunderLoanTest is BaseTest {
         mockFlashLoanReceiver = new MockFlashLoanReceiver(address(thunderLoan));    
     }
 
+
     // 检查闪电贷的owner
     function testInitializationOwner() public {
         assertEq(thunderLoan.owner(), thunderLoanOwner);
