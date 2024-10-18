@@ -22,6 +22,7 @@ contract ThunderLoanTest is BaseTest {
     }
 
 
+
     // 检查闪电贷的owner
     function testInitializationOwner() public {
         assertEq(thunderLoan.owner(), thunderLoanOwner);
